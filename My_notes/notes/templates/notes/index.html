@@ -5,7 +5,47 @@ Notes
 {% endblock %}
 
 {% block content %}
+<div class="row ">
+    <!-- Add note -->
+    <div style=" margin-left: 5% " class='col-3'>
+        <div class= 'position-fixed top-10 start-10 rounded'>
+            
+            <form action="" method = 'post'>
 
-hello
+                {% csrf_token %}
+                {{ form.as_p }}
+                
+            <a href="{% url 'index' %}">
+                <button type="submit" class="btn btn-primary">
+                    Add Note
+                </button>
+            </a>
+            </form>
+            
+        </div>
+    </div>
+
+    <!-- shows all the notes -->
+    <div class="container-fluid col-8 " style="">
+        {% for note in notes %} 
+            <div class = "text-break p-3 mb-2 bg-light bg-gradient text-dark rounded ">
+                    
+                {{note.note_text}}
+                
+                <!-- delete button -->
+                <div style = 'margin-left: 93%; margin-top: 2%;'>
+                    <a href="{% url 'delete' note.id %}">
+                        <button type="submit" class="btn btn-outline-danger btn-sm">
+                            delete
+                        </button>
+                    </a>
+                </div> 
+            </div>
+
+        {% endfor %}
+    </div>
+
+    
+</div>
 
 {% endblock %}
